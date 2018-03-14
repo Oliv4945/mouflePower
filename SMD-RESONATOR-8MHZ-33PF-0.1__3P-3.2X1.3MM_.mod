@@ -1,0 +1,52 @@
+PCBNEW-LibModule-V1  
+# encoding utf-8
+Units mm
+$INDEX
+X3-SMD-3.6X1.3X0.8MM
+$EndINDEX
+$MODULE X3-SMD-3.6X1.3X0.8MM
+Po 0 0 0 15 00000000 00000000 ~~
+Li X3-SMD-3.6X1.3X0.8MM
+Cd 
+Sc 00000000
+At SMD
+Op 0 0 0
+.SolderMask 0
+.SolderPaste 0
+T0 -0.127323 -1.71881 0.701762 0.701762 0 0.05 N V 21 "X3-SMD-3.6X1.3X0.8MM"
+T1 0.318519 1.89354 0.70224 0.70224 0 0.05 N V 21 "VAL**"
+DS -1.6 -0.65 1.6 -0.65 0.127 24
+DS 1.6 -0.65 1.6 0.65 0.127 24
+DS 1.6 0.65 -1.6 0.65 0.127 24
+DS -1.6 0.65 -1.6 -0.65 0.127 24
+DP 0 0 0 0 4 0.381 24
+Dl -1.90648 -0.889
+Dl 1.778 -0.889
+Dl 1.778 0.889691
+Dl -1.90648 0.889691
+DC -1.4 1.2 -1.2 1.2 0.127 21
+$PAD
+Sh "1" R 0.7 1.7 0 0 0
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po -1.2 0
+$EndPAD
+$PAD
+Sh "2" R 0.7 1.7 0 0 0
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 0 0
+$EndPAD
+$PAD
+Sh "3" R 0.7 1.7 0 0 0
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 1.2 0
+$EndPAD
+$EndMODULE X3-SMD-3.6X1.3X0.8MM

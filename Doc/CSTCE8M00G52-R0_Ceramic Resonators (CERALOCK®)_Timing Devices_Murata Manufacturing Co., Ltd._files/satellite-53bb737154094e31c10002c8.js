@@ -1,0 +1,22 @@
+//Adobe Analytics Video Tracking 20140319
+function getQuerystring(key, default_){
+	if (default_==null) default_="";
+	key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+	var qs = regex.exec(window.location.href);
+	if(qs == null){
+		return default_;
+	}else{
+		return qs[1];
+	}
+}
+
+function VCSiteCatalystJS(v,G,H,I){function J(a,c){if("OPEN"==c.mediaEvent||"CLOSE"==c.mediaEvent||"PLAY"==c.mediaEvent||"STOP"==c.mediaEvent||"COMPLETE"==c.mediaEvent||"MILESTONE"==c.mediaEvent)d("trackVariables: "+c.mediaEvent),"MILESTONE"==c.mediaEvent&&d(c.milestone),f.Media.trackVars="eVar46,eVar47,events",f.eVar46=""+n,f.eVar47=""+l,f.Media.track(b),f.events=""}function x(a){null==l&&(l=""+a);null==n&&(n=location.href);d("_PLAYER_NAME = "+l);d("_PAGE_NAME = "+n)}function y(a){p.removeEventListener(brightcove.api.events.ExperienceEvent.TEMPLATE_READY,
+y);e=m.getModule(brightcove.api.modules.APIModules.VIDEO_PLAYER);m.getModule(brightcove.api.modules.APIModules.CONTENT);m.getModule(brightcove.api.modules.APIModules.CUE_POINTS);e.addEventListener(brightcove.api.events.MediaEvent.BEGIN,z);e.addEventListener(brightcove.api.events.MediaEvent.CHANGE,K);e.addEventListener(brightcove.api.events.MediaEvent.COMPLETE,A);e.addEventListener(brightcove.api.events.MediaEvent.PLAY,L);e.addEventListener(brightcove.api.events.MediaEvent.PROGRESS,w);e.addEventListener(brightcove.api.events.MediaEvent.SEEK_NOTIFY,
+M);e.addEventListener(brightcove.api.events.MediaEvent.STOP,N);!1==s?p.getExperienceID(x):x(p.getExperienceID());B(!0)}function C(a){a&&h("PLAYER_LOAD",document.URL);h("VIDEO_LOAD",b)}function B(a){!1==s?e.getCurrentVideo(function(c){g=c;b=g.id+" | "+g.displayName;C(a)}):(g=e.getCurrentVideo(),b=g.id+" | "+g.displayName,C(a))}function K(a){d(a.type);t=u=q=k=r=!1;B(!1)}function D(a){g=a;b=g.id+" | "+g.displayName;r||(f.Media.open(b,Math.ceil(g.length/1E3),l),f.Media.play(b,0),h("MEDIA_BEGIN",b),r=
+!0,k=!1)}function z(a){d(a.type);!1==s?e.getCurrentVideo(D):D(e.getCurrentVideo())}function L(a){d(a.type);r||z(a);q&&(f.Media.play(b,Math.round(a.position)),q=!1,h("MEDIA_RESUME",b))}function N(a){d(a.type);if(!k&&!q){a=Math.round(a.position);var c=Math.floor(g.length/1E3)-0.1;a>c&&(a=c);f.Media.stop(b,a);q=!0;h("MEDIA_PAUSE",b)}}function A(a){k||(k=!0,r=!1,h("MEDIA_COMPLETE",b),f.Media.complete(b,Math.floor(g.length/1E3)-0.1),f.Media.close(b));d(a.type)}function w(a){E=a.position;1>Math.abs(a.duration-
+a.position)&&!k&&(e.removeEventListener(brightcove.api.events.MediaEvent.PROGRESS,w),A(a),e.addEventListener(brightcove.api.events.MediaEvent.PROGRESS,w));k||(u&&(h("SEEK_FORWARD",b),u=!1),t&&(h("SEEK_BACKWARD",b),t=!1))}function M(a){d(a.type);a.position>E?u=!0:t=!0}function h(a,b){d(" EVENT="+F[a].name+" LABEL="+b+" ENABLED="+F[a].enabled)}function d(a){O&&console.log(a)}var F={PLAYER_LOAD:{name:"Player Load",enabled:!1},VIDEO_LOAD:{name:"Video Load",enabled:!1},REFERRER_URL:{name:"Referrer URL",
+enabled:!1},MEDIA_BEGIN:{name:"Media Begin",enabled:!0},MEDIA_PAUSE:{name:"Media Pause",enabled:!1},MEDIA_RESUME:{name:"Media Resume",enabled:!1},MEDIA_COMPLETE:{name:"Media Complete",enabled:!1},MILESTONE_25:{name:"25% Milestone Passed",enabled:!1},MILESTONE_50:{name:"50% Milestone Passe",enabled:!1},MILESTONE_75:{name:"75% Milestone Passed",enabled:!1},SEEK_FORWARD:{name:"Seeked Forward",enabled:!1},SEEK_BACKWARD:{name:"Seeked Backward",enabled:!1}},l=null,n=null,f=null,m,p,e,g,b,E,r=!1,k=!1,q=
+!1,u=!1,t=!1,s=!1,l=H,n=I,f=G;(function(a){a.loadModule("Media");a.Media.trackWhilePlaying=1;a.Media.trackSeconds = 30;a.Media.trackVars="None";a.Media.trackEvents="None";a.Media.autoTrack=0;a.Media.trackUsingContextData=1;a.Media.contextDataMapping={"a.media.name":"eVar43,prop10","a.media.segment":"eVar45","a.contentType":"eVar44","a.media.timePlayed":"event44","a.media.view":"event45","a.media.segmentView":"event50","a.media.complete":"event49",'a.media.milestones':{25:'event46',50:'event47',75:'event48'}};a.Media.segmentByMilestones=1;a.Media.trackMilestones="25,50,75";a.Media.completeByCloseOffset=
+!1;a.Media.completeCloseOffsetThreshold=1;a.Media.monitor=J})(f);d("initialize: "+v);(m=brightcove.api.getExperience(v))?d("using universal api"):(m=brightcove.getExperience(v),s=!0,d("using plugin api"));p=m.getModule(brightcove.api.modules.APIModules.EXPERIENCE);p.addEventListener(brightcove.api.events.ExperienceEvent.TEMPLATE_READY,y);var O=!1};
+//AdobeAnalytics Video Tracking 20140319

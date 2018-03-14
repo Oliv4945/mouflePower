@@ -1,0 +1,6 @@
+(fp_lib_table
+  (lib (name PMIC-TPS62132RGTR_QFN16_)(type Legacy)(uri "$(KIPRJMOD)/PMIC-TPS62132RGTR_QFN16_.mod")(options "")(descr ""))
+  (lib (name CASE-369AA)(type KiCad)(uri "$(KIPRJMOD)/CASE-369AA.pretty")(options "")(descr ""))
+  (lib (name SMD-RESONATOR-8MHZ-33PF-0.1__3P-3.2X1.3MM_)(type Legacy)(uri "$(KIPRJMOD)/SMD-RESONATOR-8MHZ-33PF-0.1__3P-3.2X1.3MM_.mod")(options "")(descr ""))
+  (lib (name ViaGround)(type KiCad)(uri "$(KIPRJMOD)/ViaGround.pretty")(options "")(descr ""))
+)

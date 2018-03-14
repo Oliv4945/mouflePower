@@ -1,0 +1,40 @@
+/* Recommendation area height */
+.RTP_RCMD2 [data-rtp-id=rtp_rcmd2_tpl_1] {
+	height: 545px !important;
+}
+
+/* Area title font and margin */
+.RTP_RCMD2 .rtp_rcmd2_title {
+	font-size: 26px !important;
+	font-family: "FS Emeric Light",Verdana,sans-serif !important;
+	margin-top: 20px !important;
+	color: #293036 !important;
+}
+
+/* Content title font */
+.RTP_RCMD2 [data-rtp-id="rtp_rcmd2_tpl_1"] .rtp_rcmd2_label h4 {
+	font-size: 18px !important;
+	color: #f5002f !important;
+}
+ 
+ 
+/* Description font & text align */
+.RTP_RCMD2 [data-rtp-id="rtp_rcmd2_tpl_1"] .rtp_rcmd2_description p {
+	font-size: 14px !important;
+	color: #5b6770 !important;
+	text-align: left !important;
+}
+
+/* CTA box */
+.RTP_RCMD2 [data-rtp-id="rtp_rcmd2_tpl_1"] .rtp_rcmd2_link_container a {
+    padding: 10px 40px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+    font-size: 16px !important;
+}
+
+/* Background color of image area */
+.RTP_RCMD2 [data-rtp-id="rtp_rcmd2_tpl_1"] .rtp_rcmd2_img_container {
+	background: #ffffff !important;
+}

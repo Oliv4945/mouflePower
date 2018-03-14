@@ -1,0 +1,42 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# PMIC-TPS62132RGTR(QFN16)
+#
+DEF PMIC-TPS62132RGTR(QFN16) U 0 40 Y Y 1 L N
+F0 "U" 0 0 50 H I L BNN
+F1 "PMIC-TPS62132RGTR(QFN16)" 0 0 50 H I L BNN
+F2 "QFN16G-0.5-3X3MM" 0 0 50 H I L BNN
+F3 "https://www.digikey.fr/product-detail/en/texas-instruments/TPS62132RGTR/296-29936-1-ND/2786735?WT.z_cid=ref_snapeda&utm_source=snapeda&utm_medium=aggregator&utm_campaign=buynow" 0 0 50 H I L BNN
+F4 "TPS62132RGTR" 0 0 50 H I L BNN
+F5 "QFN-16 Texas Instruments" 0 0 50 H I L BNN
+F6 "IC REG BUCK 3.3V 3A SYNC 16QFN" 0 0 50 H I L BNN
+F7 "296-29936-1-ND" 0 0 50 H I L BNN
+F8 "Texas Instruments" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 10 -400 600 300 600 N
+P 2 0 0 10 300 600 300 -600 N
+P 2 0 0 10 300 -600 -400 -600 N
+P 2 0 0 10 -400 -600 -400 600 N
+X PVIN 11 -500 500 100 R 40 40 0 0 B 
+X PVIN 12 -500 500 100 R 40 40 0 0 B 
+X AVIN 10 -500 300 100 R 40 40 0 0 B 
+X EN 13 -500 100 100 R 40 40 0 0 B 
+X SS/TR 9 -500 -100 100 R 40 40 0 0 B 
+X DEF 8 -500 -300 100 R 40 40 0 0 B 
+X FSW 7 -500 -500 100 R 40 40 0 0 B 
+X PGND 15 400 -500 100 L 40 40 0 0 B 
+X PGND 16 400 -500 100 L 40 40 0 0 B 
+X AGND 6 400 -300 100 L 40 40 0 0 B 
+X FB 5 400 -100 100 L 40 40 0 0 B 
+X PG 4 400 100 100 L 40 40 0 0 B 
+X VOS 14 400 300 100 L 40 40 0 0 B 
+X SW 1 400 500 100 L 40 40 0 0 B 
+X SW 2 400 500 100 L 40 40 0 0 B 
+X SW 3 400 500 100 L 40 40 0 0 B 
+ENDDRAW
+ENDDEF
+#
+# End Library
