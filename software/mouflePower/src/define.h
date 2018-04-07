@@ -29,6 +29,9 @@ static const uint8_t ADC_A7    = A7;
 static const int EINK_BLACK = 0;
 static const int EINK_RED   = 1;
 
+static const float ADC_CAL_VAUX = 1.032445688;
+static const float ADC_FACTOR   = ( 620.0 + 2400.0 ) / 620.0 * 3.26 / 1023.0;
+
 // Debug activation
 #define SERIAL_BAUD 115200
 #ifdef SERIAL_BAUD 
