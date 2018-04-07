@@ -4,6 +4,12 @@
 #include <stdio.h>
 #include <Arduino.h>
 
+// Types
+typedef enum {
+  MOSFET_ON = HIGH,
+  MOSFET_OFF = LOW,
+} mosfetStates_t;
+
 // I/O
 static const uint8_t TX        =  0;
 static const uint8_t RX        =  1;

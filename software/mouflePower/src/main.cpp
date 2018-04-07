@@ -10,7 +10,7 @@ Epd epd;
 void setup() {
     // Pin initialisation
     pinMode( MOSFET,   OUTPUT );
-    digitalWrite( MOSFET, LOW );
+    digitalWrite( MOSFET, (uint8_t) MOSFET_OFF );
     pinMode( RFM_INT0, INPUT );
     pinMode( SW_FORCE, INPUT );
     pinMode( SPI_SS,   OUTPUT );
@@ -20,8 +20,6 @@ void setup() {
     pinMode( ADC_MAIN, INPUT );
     pinMode( ADC_AUX,  INPUT );
     pinMode( ADC_A2,   INPUT );
-    pinMode( MOSFET,   OUTPUT );
-    digitalWrite( MOSFET, LOW );
     pinMode( ADC_A7,   INPUT );
 
     // Serial initialisation
