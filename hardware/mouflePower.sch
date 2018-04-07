@@ -1069,7 +1069,7 @@ $EndComp
 Wire Wire Line
 	3900 1950 4450 1950
 Text Label 3950 1950 0    60   ~ 0
-A0_VMAIN
+A0_VAUX
 Wire Wire Line
 	5800 6300 5800 6650
 Wire Wire Line
@@ -1077,7 +1077,7 @@ Wire Wire Line
 Wire Wire Line
 	5800 6450 5900 6450
 Text Label 5900 6300 0    60   ~ 0
-A0_VMAIN
+A0_VAUX
 $Comp
 L R R9
 U 1 1 5A9B9473
@@ -1123,9 +1123,9 @@ Wire Wire Line
 Wire Wire Line
 	5800 7200 5900 7200
 Text Label 5900 7050 0    60   ~ 0
-A1_VAUX
+A1_VMAIN
 Text Label 3950 2050 0    60   ~ 0
-A1_VAUX
+A1_VMAIN
 Wire Wire Line
 	3900 2050 4450 2050
 $Comp
