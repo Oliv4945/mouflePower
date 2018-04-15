@@ -147,7 +147,7 @@ void loop( ) {
             }
 
             temperature.current = hdc1080.readTemperature( );
-            if ( abs( temperature.old - temperature.current ) > 0.2 ) {
+            if ( abs( temperature.old - temperature.current ) > 0.5 ) {
                 dtostrf( temperature.current, 5, 2, temp );
                 DEBUG( "temperature: " );
                 DEBUGln( temp );
@@ -159,7 +159,7 @@ void loop( ) {
             }
 
             humidity.current = hdc1080.readHumidity( );
-            if ( abs( humidity.old - humidity.current ) > 1 ) {
+            if ( abs( humidity.old - humidity.current ) > 2 ) {
                 dtostrf( humidity.current, 5, 2, temp );
                 DEBUG( "humidity: " );
                 DEBUGln( temp );
@@ -174,7 +174,7 @@ void loop( ) {
                 sprintf( temp, "%d", refreshedScreenCnt );
                 paint.SetHeight( 16 );
                 paint.Clear( EINK_WHITE );
-                paint.DrawStringAt( 0, 3, temp, &Font12, EINK_COLORED ); // 24.81  - 35.13
+                paint.DrawStringAt( 0, 3, temp, &Font12, EINK_COLORED );
                 epd.SetPartialWindowBlack( paint.GetImage( ), 3, 3, paint.GetWidth( ), paint.GetHeight( ) );
 
                 epd.DisplayFrame( );
