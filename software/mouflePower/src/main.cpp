@@ -101,11 +101,18 @@ void loop( ) {
     mosfetStates_t mosfetState = MOSFET_OFF;
     uint8_t loop;
     voltages_s voltages;
+    oldNew_s temperature;
+    oldNew_s humidity;
+    boolean updateScreen;
+    uint16_t refreshedScreenCnt;
 
     // Init
     loop = 0;
     voltages.vAux.old = 0;
     voltages.vMain.old = 0;
+    temperature.old = 0;
+    humidity.old = 0;
+    refreshedScreenCnt = 0;
 
 
 
@@ -122,36 +129,57 @@ void loop( ) {
         }
 
         // Update screen
-        if ( loop % 30 == 0 ) {
+        if ( loop % 10 == 0 ) {
+            char temp[6];
             unsigned char image[1024];
             Paint paint( image, 128, 23 );    //width should be the multiple of 8
-            char temp[10];
-            dtostrf( voltages.vAux.current, 5, 2, temp );
-            DEBUG("Vaux: " );
-            DEBUGln( temp );
-            paint.SetWidth( 70 );
-            paint.Clear( EINK_WHITE );
-            paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
-            epd.SetPartialWindowBlack( paint.GetImage( ), 25, 125, paint.GetWidth( ), paint.GetHeight( ) );
 
-            float temperature = hdc1080.readTemperature( );
-            // TODO: Handle other string size
-            dtostrf( temperature, 5, 2, temp );
-            DEBUG( "temperature: " );
-            DEBUGln( temp );
-            paint.Clear( EINK_WHITE );
-            paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
-            epd.SetPartialWindowBlack( paint.GetImage( ), 25, 160 + 28, paint.GetWidth( ), paint.GetHeight( ) );
+            if ( abs ( voltages.vAux.old - voltages.vAux.current ) > 0.25 ) {
+                dtostrf( voltages.vAux.current, 5, 2, temp );
+                DEBUG("Vaux: " );
+                DEBUGln( temp );
+                paint.SetWidth( 70 );
+                paint.Clear( EINK_WHITE );
+                paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
+                epd.SetPartialWindowBlack( paint.GetImage( ), 25, 125, paint.GetWidth( ), paint.GetHeight( ) );
+                voltages.vAux.old = voltages.vAux.current;
+                updateScreen  = true;
+            }
 
-            float humidity = hdc1080.readHumidity( );
-            dtostrf( humidity, 5, 2, temp );
-            DEBUG( "humidity: " );
-            DEBUGln( temp );
-            paint.Clear( EINK_WHITE );
-            paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
-            epd.SetPartialWindowBlack( paint.GetImage( ), 25, 160 + 28 * 2, paint.GetWidth( ), paint.GetHeight( ) );
+            temperature.current = hdc1080.readTemperature( );
+            if ( abs( temperature.old - temperature.current ) > 0.2 ) {
+                dtostrf( temperature.current, 5, 2, temp );
+                DEBUG( "temperature: " );
+                DEBUGln( temp );
+                paint.Clear( EINK_WHITE );
+                paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
+                epd.SetPartialWindowBlack( paint.GetImage( ), 25, 160 + 28, paint.GetWidth( ), paint.GetHeight( ) );
+                temperature.old = temperature.current;
+                updateScreen = true;
+            }
 
-            epd.DisplayFrame( );
+            humidity.current = hdc1080.readHumidity( );
+            if ( abs( humidity.old - humidity.current ) > 1 ) {
+                dtostrf( humidity.current, 5, 2, temp );
+                DEBUG( "humidity: " );
+                DEBUGln( temp );
+                paint.Clear( EINK_WHITE );
+                paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
+                epd.SetPartialWindowBlack( paint.GetImage( ), 25, 160 + 28 * 2, paint.GetWidth( ), paint.GetHeight( ) );
+                humidity.old = humidity.current;
+                updateScreen = true;
+            }
+            if ( updateScreen == true ) {
+                refreshedScreenCnt ++;
+                sprintf( temp, "%d", refreshedScreenCnt );
+                paint.SetHeight( 16 );
+                paint.Clear( EINK_WHITE );
+                paint.DrawStringAt( 0, 3, temp, &Font12, EINK_COLORED ); // 24.81  - 35.13
+                epd.SetPartialWindowBlack( paint.GetImage( ), 3, 3, paint.GetWidth( ), paint.GetHeight( ) );
+
+                epd.DisplayFrame( );
+                updateScreen = false;
+            }
         }
 
         delay( 1000 );
