@@ -10,6 +10,17 @@ typedef enum {
   MOSFET_OFF = LOW,
 } mosfetStates_t;
 
+// Structures
+typedef struct {
+  float old;
+  float current;
+} oldNew_s;
+
+typedef struct {
+  oldNew_s vAux;
+  oldNew_s vMain;
+} voltages_s;
+
 // I/O
 static const uint8_t TX        =  0;
 static const uint8_t RX        =  1;
@@ -39,6 +50,9 @@ static const int EINK_WHITE   = 1;
 //14.24/14.079 = 1,011435471
 static const float ADC_CAL_VAUX = 1.012;
 static const float ADC_FACTOR   = ( 620.0 + 2400.0 ) / 620.0 * 3.26 / 1023.0;
+
+static const float CHARGE_ON_THRESHOLD  = 13.6;
+static const float CHARGE_OFF_THRESHOLD = 14.0; // TBC with alternor values
 
 // Debug activation
 #define SERIAL_BAUD 115200
