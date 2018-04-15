@@ -35,7 +35,9 @@ static const uint8_t ADC_A7    = A7;
 static const int EINK_COLORED = 0;
 static const int EINK_WHITE   = 1;
 
-static const float ADC_CAL_VAUX = 1.032445688;
+//12.86/12.697 = 1,012837678
+//14.24/14.079 = 1,011435471
+static const float ADC_CAL_VAUX = 1.012;
 static const float ADC_FACTOR   = ( 620.0 + 2400.0 ) / 620.0 * 3.26 / 1023.0;
 
 // Debug activation
