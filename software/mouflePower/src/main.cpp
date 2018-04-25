@@ -138,7 +138,7 @@ void loop( ) {
                 dtostrf( voltages.vAux.current, 5, 2, temp );
                 DEBUG("Vaux: " );
                 DEBUGln( temp );
-                paint.SetWidth( 70 );
+                paint.SetWidth( Font20.Width * 5 );
                 paint.Clear( EINK_WHITE );
                 paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
                 epd.SetPartialWindowBlack( paint.GetImage( ), 25, 125, paint.GetWidth( ), paint.GetHeight( ) );
