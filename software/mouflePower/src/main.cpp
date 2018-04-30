@@ -165,7 +165,11 @@ void loop( ) {
                 paint.SetWidth( Font20.Width * 5 );
                 paint.Clear( EINK_WHITE );
                 paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
-                epd.SetPartialWindowBlack( paint.GetImage( ), 25, PAGE_HEIGHT*2, paint.GetWidth( ), paint.GetHeight( ) );
+                if ( voltages.vMain.current > ( BAT_MAX - BAT_MIN ) * BAT_RED_PERCENTAGE + BAT_MIN ) {
+                    epd.SetPartialWindowBlack( paint.GetImage( ), 25, PAGE_HEIGHT*2, paint.GetWidth( ), paint.GetHeight( ) );
+                } else {
+                    epd.SetPartialWindowRed( paint.GetImage( ), 25, PAGE_HEIGHT*2, paint.GetWidth( ), paint.GetHeight( ) );
+                }
                 voltages.vMain.old = voltages.vMain.current;
                 updateScreen  = true;
             }
@@ -177,7 +181,11 @@ void loop( ) {
                 paint.SetWidth( Font20.Width * 5 );
                 paint.Clear( EINK_WHITE );
                 paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
-                epd.SetPartialWindowBlack( paint.GetImage( ), 25, PAGE_HEIGHT*4, paint.GetWidth( ), paint.GetHeight( ) );
+                if ( voltages.vAux.current > ( BAT_MAX - BAT_MIN ) * BAT_RED_PERCENTAGE + BAT_MIN ) {
+                    epd.SetPartialWindowBlack( paint.GetImage( ), 25, PAGE_HEIGHT*4, paint.GetWidth( ), paint.GetHeight( ) );
+                } else {
+                    epd.SetPartialWindowRed( paint.GetImage( ), 25, PAGE_HEIGHT*4, paint.GetWidth( ), paint.GetHeight( ) );
+                }
                 voltages.vAux.old = voltages.vAux.current;
                 updateScreen  = true;
             }

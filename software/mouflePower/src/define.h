@@ -53,6 +53,9 @@ static const float ADC_FACTOR   = ( 620.0 + 2400.0 ) / 620.0 * 3.26 / 1023.0;
 
 static const float CHARGE_ON_THRESHOLD  = 13.6;
 static const float CHARGE_OFF_THRESHOLD = 14.0; // TBC with alternor values
+static const float BAT_MIN = 10.8;
+static const float BAT_MAX = 14;
+static const float BAT_RED_PERCENTAGE = 0.6;
 
 static const uint8_t PAGE_HEIGHT = 32;
 
