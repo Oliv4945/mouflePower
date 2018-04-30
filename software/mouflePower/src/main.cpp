@@ -62,31 +62,31 @@ void setup() {
         paint.Clear( EINK_COLORED );
         // X, Y
         paint.DrawStringAt( 10, 3, "Camion", &Font20, EINK_WHITE );
-        epd.SetPartialWindowBlack( paint.GetImage( ), 0, 32, paint.GetWidth( ), paint.GetHeight( ) );
+        epd.SetPartialWindowBlack( paint.GetImage( ), 0, PAGE_HEIGHT, paint.GetWidth( ), paint.GetHeight( ) );
 
         paint.Clear( EINK_COLORED );
         paint.DrawStringAt( 10, 3, "Aux", &Font20, EINK_WHITE );
-        epd.SetPartialWindowBlack( paint.GetImage( ), 0, 96, paint.GetWidth( ), paint.GetHeight( ) );
+        epd.SetPartialWindowBlack( paint.GetImage( ), 0, PAGE_HEIGHT*3, paint.GetWidth( ), paint.GetHeight( ) );
 
         paint.Clear( EINK_COLORED );
         paint.DrawStringAt( 10, 3, "Air", &Font20, EINK_WHITE );
-        epd.SetPartialWindowBlack( paint.GetImage( ), 0, 160, paint.GetWidth( ), paint.GetHeight( ) );
+        epd.SetPartialWindowBlack( paint.GetImage( ), 0, PAGE_HEIGHT*5, paint.GetWidth( ), paint.GetHeight( ) );
 
         paint.Clear( EINK_WHITE );
         paint.DrawStringAt( 100, 3, "V", &Font20, EINK_COLORED );
-        epd.SetPartialWindowBlack( paint.GetImage( ), 0, 60, paint.GetWidth( ), paint.GetHeight( ) );
+        epd.SetPartialWindowBlack( paint.GetImage( ), 0, PAGE_HEIGHT*2, paint.GetWidth( ), paint.GetHeight( ) );
 
         paint.Clear( EINK_WHITE );
         paint.DrawStringAt( 100, 3, "V", &Font20, EINK_COLORED );
-        epd.SetPartialWindowBlack( paint.GetImage( ), 0, 125, paint.GetWidth( ), paint.GetHeight( ) );
+        epd.SetPartialWindowBlack( paint.GetImage( ), 0, PAGE_HEIGHT*4, paint.GetWidth( ), paint.GetHeight( ) );
 
         paint.Clear( EINK_WHITE );
         paint.DrawStringAt( 100, 3, " C", &Font20, EINK_COLORED );
-        epd.SetPartialWindowBlack( paint.GetImage( ), 0, 160+28, paint.GetWidth( ), paint.GetHeight( ) );
+        epd.SetPartialWindowBlack( paint.GetImage( ), 0, PAGE_HEIGHT*6, paint.GetWidth( ), paint.GetHeight( ) );
 
         paint.Clear( EINK_WHITE );
-        paint.DrawStringAt( 100, 3, "%", &Font20, EINK_COLORED );
-        epd.SetPartialWindowBlack( paint.GetImage( ), 0, 160+28*2, paint.GetWidth( ), paint.GetHeight( ) );
+        paint.DrawStringAt( 110, 3, "%", &Font20, EINK_COLORED );
+        epd.SetPartialWindowBlack( paint.GetImage( ), 0, PAGE_HEIGHT*7, paint.GetWidth( ), paint.GetHeight( ) );
     }
 
     // Default settings:
@@ -134,6 +134,32 @@ void loop( ) {
             unsigned char image[1024];
             Paint paint( image, 128, 23 );    //width should be the multiple of 8
 
+            if ( mosfetState = MOSFET_ON ) {
+                paint.SetWidth( Font20.Width * 6 );
+                paint.Clear( EINK_WHITE );
+                sprintf( temp, "Charge" );
+                paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
+                epd.SetPartialWindowBlack( paint.GetImage( ), 35, 4, paint.GetWidth( ), paint.GetHeight( ) );
+            } else {
+                paint.SetWidth( Font20.Width * 5 );
+                paint.Clear( EINK_WHITE );
+                sprintf( temp, "OFF" );
+                paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
+                epd.SetPartialWindowBlack( paint.GetImage( ), 55, 4, paint.GetWidth( ), paint.GetHeight( ) );
+            }
+
+            if ( abs ( voltages.vMain.old - voltages.vMain.current ) > 0.25 ) {
+                dtostrf( voltages.vMain.current, 5, 2, temp );
+                DEBUG("Vmain: " );
+                DEBUGln( temp );
+                paint.SetWidth( Font20.Width * 5 );
+                paint.Clear( EINK_WHITE );
+                paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
+                epd.SetPartialWindowBlack( paint.GetImage( ), 25, PAGE_HEIGHT*2, paint.GetWidth( ), paint.GetHeight( ) );
+                voltages.vMain.old = voltages.vMain.current;
+                updateScreen  = true;
+            }
+            
             if ( abs ( voltages.vAux.old - voltages.vAux.current ) > 0.25 ) {
                 dtostrf( voltages.vAux.current, 5, 2, temp );
                 DEBUG("Vaux: " );
@@ -141,7 +167,7 @@ void loop( ) {
                 paint.SetWidth( Font20.Width * 5 );
                 paint.Clear( EINK_WHITE );
                 paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
-                epd.SetPartialWindowBlack( paint.GetImage( ), 25, 125, paint.GetWidth( ), paint.GetHeight( ) );
+                epd.SetPartialWindowBlack( paint.GetImage( ), 25, PAGE_HEIGHT*4, paint.GetWidth( ), paint.GetHeight( ) );
                 voltages.vAux.old = voltages.vAux.current;
                 updateScreen  = true;
             }
@@ -153,7 +179,7 @@ void loop( ) {
                 DEBUGln( temp );
                 paint.Clear( EINK_WHITE );
                 paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
-                epd.SetPartialWindowBlack( paint.GetImage( ), 25, 160 + 28, paint.GetWidth( ), paint.GetHeight( ) );
+                epd.SetPartialWindowBlack( paint.GetImage( ), 25, PAGE_HEIGHT*6, paint.GetWidth( ), paint.GetHeight( ) );
                 temperature.old = temperature.current;
                 updateScreen = true;
             }
@@ -165,13 +191,14 @@ void loop( ) {
                 DEBUGln( temp );
                 paint.Clear( EINK_WHITE );
                 paint.DrawStringAt( 0, 3, temp, &Font20, EINK_COLORED );
-                epd.SetPartialWindowBlack( paint.GetImage( ), 25, 160 + 28 * 2, paint.GetWidth( ), paint.GetHeight( ) );
+                epd.SetPartialWindowBlack( paint.GetImage( ), 25, PAGE_HEIGHT*7, paint.GetWidth( ), paint.GetHeight( ) );
                 humidity.old = humidity.current;
                 updateScreen = true;
             }
             if ( updateScreen == true ) {
                 refreshedScreenCnt ++;
                 sprintf( temp, "%d", refreshedScreenCnt );
+                paint.SetWidth( Font12.Width*3 );
                 paint.SetHeight( 16 );
                 paint.Clear( EINK_WHITE );
                 paint.DrawStringAt( 0, 3, temp, &Font12, EINK_COLORED );
