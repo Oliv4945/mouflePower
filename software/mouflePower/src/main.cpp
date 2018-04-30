@@ -108,24 +108,34 @@ void loop( ) {
 
     // Init
     loop = 0;
-    voltages.vAux.old = 0;
-    voltages.vMain.old = 0;
+    voltages.vAux.old = 20;   // Init to 20 to force update on first loop
+    voltages.vMain.old = 20;
     temperature.old = 0;
     humidity.old = 0;
     refreshedScreenCnt = 0;
+    updateScreen = true;
 
 
 
     while (1) {
         // Update mosfet state
         voltages.vAux.current = analogReadAvg( ADC_AUX, (uint8_t) 5 ) * ADC_FACTOR * ADC_CAL_VAUX;
-        if ( ( mosfetState == MOSFET_OFF ) && ( voltages.vAux.current > CHARGE_ON_THRESHOLD ) ) {
+        voltages.vMain.current = analogReadAvg( ADC_MAIN, (uint8_t) 5 ) * ADC_FACTOR * ADC_CAL_VAUX;
+        if ( ( mosfetState == MOSFET_OFF ) && ( voltages.vMain.current > CHARGE_ON_THRESHOLD ) ) {
             digitalWrite( MOSFET, (uint8_t) MOSFET_ON );
-            mosfetState = MOSFET_ON;
+            mosfetState   = MOSFET_ON;
+            updateScreen  = true;
+            Serial.print( "STATE - Charge: ");
+            Serial.print( voltages.vMain.current );
+            Serial.println( "V" );
         }
-        if ( ( mosfetState == MOSFET_ON ) && ( voltages.vAux.current < CHARGE_OFF_THRESHOLD ) ) {
+        if ( ( mosfetState == MOSFET_ON ) && ( voltages.vMain.current < CHARGE_OFF_THRESHOLD ) ) {
             digitalWrite( MOSFET, (uint8_t) MOSFET_OFF );
-            mosfetState = MOSFET_OFF;
+            mosfetState   = MOSFET_OFF;
+            updateScreen  = true;
+            Serial.print( "STATE - OFF: ");
+            Serial.print( voltages.vMain.current );
+            Serial.println( "V" );
         }
 
         // Update screen
@@ -134,7 +144,7 @@ void loop( ) {
             unsigned char image[1024];
             Paint paint( image, 128, 23 );    //width should be the multiple of 8
 
-            if ( mosfetState = MOSFET_ON ) {
+            if ( mosfetState == MOSFET_ON ) {
                 paint.SetWidth( Font20.Width * 6 );
                 paint.Clear( EINK_WHITE );
                 sprintf( temp, "Charge" );
